@@ -39,14 +39,9 @@ class _CropScreenState extends State<CropScreen> {
           IconButton(
             icon:Icon(Icons.offline_pin),
             onPressed: () async {
-              dynamic res = await ImgProc.threshold(await File(widget.imgPath).readAsBytes(), 116, 255, ImgProc.threshBinary);
-              final file = File(join((await getTemporaryDirectory()).path,
-                  '${DateTime.now()}.png'));
-              await file.writeAsBytes(res);
-
               Navigator.push(context,MaterialPageRoute(
                   builder: (context) => PreviewScreen(
-                    imgPath: file.path,
+                    imgPath: widget.imgPath,
                   )
               ));
               //Cropped Picture has to be passed to opencv portion of code
