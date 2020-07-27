@@ -26,6 +26,7 @@ class _PreviewScreenState extends State<PreviewScreen>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         automaticallyImplyLeading: true,
       ),
@@ -35,7 +36,7 @@ class _PreviewScreenState extends State<PreviewScreen>{
           children: <Widget>[
             Expanded(
               flex: 2,
-              child: Image.file(File(widget.imgPath),fit: BoxFit.cover,),
+              child: Image.file(File(widget.imgPath)),
             ),
             Align(
               alignment: Alignment.bottomCenter,

@@ -2,6 +2,11 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:opencv/opencv.dart';
+import 'package:opencv/core/core.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:scanner/Screens/PreviewScreen.dart';
 
 
 class CropScreen extends StatefulWidget {
@@ -33,8 +38,17 @@ class _CropScreenState extends State<CropScreen> {
       ),
           IconButton(
             icon:Icon(Icons.offline_pin),
-            onPressed: (){
-              _cropImage();
+            onPressed: () async {
+              dynamic res = await ImgProc.threshold(await File(widget.imgPath).readAsBytes(), 116, 255, ImgProc.threshBinary);
+              final file = File(join((await getTemporaryDirectory()).path,
+                  '${DateTime.now()}.png'));
+              await file.writeAsBytes(res);
+
+              Navigator.push(context,MaterialPageRoute(
+                  builder: (context) => PreviewScreen(
+                    imgPath: file.path,
+                  )
+              ));
               //Cropped Picture has to be passed to opencv portion of code
             },
           ),
