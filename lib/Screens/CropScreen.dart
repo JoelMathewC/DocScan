@@ -11,19 +11,12 @@ class CropScreen extends StatefulWidget {
   _CropScreenState createState() => _CropScreenState();
 }
 
-enum AppState{
-  free,picked,cropped
-}
+
 
 class _CropScreenState extends State<CropScreen> {
-  AppState state;
+
   File imageFile;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    state = AppState.free;
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
